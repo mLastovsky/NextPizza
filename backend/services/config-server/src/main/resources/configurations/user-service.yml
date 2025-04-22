@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/db-name
+    url: jdbc:postgresql://localhost:5433/next-pizza
     username:
     password:
     driver-class-name: org.postgresql.Driver
@@ -10,6 +10,10 @@ spring:
       ddl-auto: update
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
 
 server:
   port: 8010
