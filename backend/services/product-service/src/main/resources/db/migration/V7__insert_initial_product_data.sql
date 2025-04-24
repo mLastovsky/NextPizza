@@ -1,0 +1,18 @@
+INSERT INTO product (name, image_url, category_id, created_at) VALUES
+('Омлет с ветчиной и грибами', 'https://media.dodostatic.net/image/r:292x292/11EE7970321044479C1D1085457A36EB.webp', 2, NOW()),
+('Омлет с пепперони', 'https://media.dodostatic.net/image/r:292x292/11EE94ECF33B0C46BA410DEC1B1DD6F8.webp', 2, NOW()),
+('Кофе Латте', 'https://media.dodostatic.net/image/r:292x292/11EE7D61B0C26A3F85D97A78FEEE00AD.webp', 2, NOW()),
+('Дэнвич ветчина и сыр', 'https://media.dodostatic.net/image/r:292x292/11EE796FF0059B799A17F57A9E64C725.webp', 3, NOW()),
+('Куриные наггетсы', 'https://media.dodostatic.net/image/r:292x292/11EE7D618B5C7EC29350069AE9532C6E.webp', 3, NOW()),
+('Картофель из печи с соусом 🌱', 'https://media.dodostatic.net/image/r:292x292/11EED646A9CD324C962C6BEA78124F19.webp', 3, NOW()),
+('Додстер', 'https://media.dodostatic.net/image/r:292x292/11EE796F96D11392A2F6DD73599921B9.webp', 3, NOW()),
+('Острый Додстер 🌶️🌶️', 'https://media.dodostatic.net/image/r:292x292/11EE796FD3B594068F7A752DF8161D04.webp', 3, NOW()),
+('Банановый молочный коктейль', 'https://media.dodostatic.net/image/r:292x292/11EEE20B8772A72A9B60CFB20012C185.webp', 4, NOW()),
+('Карамельное яблоко молочный коктейль', 'https://media.dodostatic.net/image/r:292x292/11EE79702E2A22E693D96133906FB1B8.webp', 4, NOW()),
+('Молочный коктейль с печеньем Орео', 'https://media.dodostatic.net/image/r:292x292/11EE796FA1F50F8F8111A399E4C1A1E3.webp', 4, NOW()),
+('Классический молочный коктейль 👶', 'https://media.dodostatic.net/image/r:292x292/11EE796F93FB126693F96CB1D3E403FB.webp', 4, NOW()),
+('Ирландский Капучино', 'https://media.dodostatic.net/image/r:292x292/11EE7D61999EBDA59C10E216430A6093.webp', 5, NOW()),
+('Кофе Карамельный капучино', 'https://media.dodostatic.net/image/r:292x292/11EE7D61AED6B6D4BFDAD4E58D76CF56.webp', 5, NOW()),
+('Кофе Кокосовый латте', 'https://media.dodostatic.net/image/r:292x292/11EE7D61B19FA07090EE88B0ED347F42.webp', 5, NOW()),
+('Кофе Американо', 'https://media.dodostatic.net/image/r:292x292/11EE7D61B044583596548A59078BBD33.webp', 5, NOW()),
+('Кофе Латте', 'https://media.dodostatic.net/image/r:292x292/11EE7D61B0C26A3F85D97A78FEEE00AD.webp', 5, NOW());

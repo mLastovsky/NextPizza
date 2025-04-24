@@ -1,0 +1,18 @@
+INSERT INTO ingredient (name, price, image_url, created_at) VALUES
+('Сырный бортик', 179, 'https://cdn.dodostatic.net/static/Img/Ingredients/99f5cb91225b4875bd06a26d2e842106.png', NOW()),
+('Сливочная моцарелла', 79, 'https://cdn.dodostatic.net/static/Img/Ingredients/cdea869ef287426386ed634e6099a5ba.png', NOW()),
+('Сыры чеддер и пармезан', 79, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA69C1FE796', NOW()),
+('Острый перец халапеньо', 59, 'https://cdn.dodostatic.net/static/Img/Ingredients/11ee95b6bfdf98fb88a113db92d7b3df.png', NOW()),
+('Нежный цыпленок', 79, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA5B328D35A', NOW()),
+('Шампиньоны', 59, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA67259A324', NOW()),
+('Ветчина', 79, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA61B9A8D61', NOW()),
+('Пикантная пепперони', 79, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA6258199C3', NOW()),
+('Острая чоризо', 79, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA62D5D6027', NOW()),
+('Маринованные огурчики', 59, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9EA89958D782B', NOW()),
+('Свежие томаты', 59, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA7AC1A1D67', NOW()),
+('Красный лук', 59, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA60AE6464C', NOW()),
+('Сочные ананасы', 59, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9AFA6795BA2A0', NOW()),
+('Итальянские травы', 39, 'https://cdn.dodostatic.net/static/Img/Ingredients/370dac9ed21e4bffaf9bc2618d258734.png', NOW()),
+('Сладкий перец', 59, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA63F774C1B', NOW()),
+('Кубики брынзы', 79, 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA6B0FFC349', NOW()),
+('Митболы', 79, 'https://cdn.dodostatic.net/static/Img/Ingredients/b2f3a5d5afe44516a93cfc0d2ee60088.png', NOW());
