@@ -57,7 +57,7 @@ public class ProductController {
     ) {
         return ResponseEntity
                 .accepted()
-                .body(productService.partitionUpdateProduct(id, productRequestDto));
+                .body(productService.partiallyUpdateProduct(id, productRequestDto));
     }
 
     @DeleteMapping("/{id}")
