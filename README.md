@@ -28,6 +28,10 @@ Modern pizza delivery platform built with microservices architecture.
 
 ![Database Schema Diagram](diagrams/db_schema.png)
 
+## Architecture Diagram
+
+![Architecture Diagram](diagrams/architecture_diagram.png)
+
 ## 🚀 Quick Start
 
 ```bash
