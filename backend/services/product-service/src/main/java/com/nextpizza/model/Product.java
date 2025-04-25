@@ -43,4 +43,8 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<ProductIngredient> ingredients = new ArrayList<>();
 
+    @Builder.Default
+    @OneToMany(mappedBy = "product",  cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductItem> productItems = new ArrayList<>();
+
 }
