@@ -39,12 +39,8 @@ public class Product {
     @Column(insertable = false)
     private OffsetDateTime updatedAt;
 
-    @ManyToMany(mappedBy = "products")
-    @JoinTable(
-            name = "product_ingredient",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
-    )
-    private List<Ingredient> ingredients = new ArrayList<>();
+    @Builder.Default
+    @OneToMany(mappedBy = "product")
+    private List<ProductIngredient> ingredients = new ArrayList<>();
 
 }

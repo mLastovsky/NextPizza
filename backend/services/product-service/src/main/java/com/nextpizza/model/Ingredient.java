@@ -39,7 +39,7 @@ public class Ingredient {
     private OffsetDateTime updatedAt;
 
     @Builder.Default
-    @ManyToMany(mappedBy = "ingredients")
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "ingredient")
+    private List<ProductIngredient> products = new ArrayList<>();
 
 }
