@@ -11,5 +11,25 @@ spring:
           predicates:
             - Path=/api/v1/users/**
 
+        - id: product-service
+          uri: lb:http://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/products/**
+
+        - id: ingredients-service
+          uri: lb:http://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/ingredients/**
+
+        - id: product-items-service
+          uri: lb:http://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/product-items/**
+
+        - id: categories-service
+          uri: lb:http://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/categories/**
+
 server:
   port: 8222
