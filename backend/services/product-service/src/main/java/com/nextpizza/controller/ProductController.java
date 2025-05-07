@@ -3,17 +3,16 @@ package com.nextpizza.controller;
 import com.nextpizza.dto.ProductRequestDto;
 import com.nextpizza.dto.ProductResponseDto;
 import com.nextpizza.dto.ProductUpdateDto;
-import com.nextpizza.model.ProductFilter;
+import com.nextpizza.dto.ProductFilterDto;
 import com.nextpizza.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static com.fasterxml.jackson.core.internal.shaded.fdp.v2_18_3.JavaBigDecimalParser.parseBigDecimal;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -24,21 +23,10 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<ProductResponseDto>> getAllProducts(
-            @RequestParam(required = false) String priceFrom,
-            @RequestParam(required = false) String priceTo,
-            @RequestParam(required = false) List<Integer> pizzaTypes,
-            @RequestParam(required = false) List<Integer> sizes,
-            @RequestParam(required = false) List<Long> ingredients
+            @ModelAttribute @Valid ProductFilterDto filterDto,
+            Pageable pageable
     ) {
-        var filter = ProductFilter.builder()
-            .priceFrom(parseBigDecimal(priceFrom))
-            .priceTo(parseBigDecimal(priceTo))
-            .pizzaTypes(pizzaTypes)
-            .sizes(sizes)
-            .ingredientIds(ingredients)
-            .build();
-
-        return ResponseEntity.ok(productService.getAllProducts(filter));
+        return ResponseEntity.ok(productService.getFilteredProducts(filterDto, pageable));
     }
 
     @GetMapping("/{id}")
