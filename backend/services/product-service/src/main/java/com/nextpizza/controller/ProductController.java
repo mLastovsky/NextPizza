@@ -3,6 +3,7 @@ package com.nextpizza.controller;
 import com.nextpizza.dto.ProductRequestDto;
 import com.nextpizza.dto.ProductResponseDto;
 import com.nextpizza.dto.ProductUpdateDto;
+import com.nextpizza.model.ProductFilter;
 import com.nextpizza.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.fasterxml.jackson.core.internal.shaded.fdp.v2_18_3.JavaBigDecimalParser.parseBigDecimal;
+
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
@@ -20,8 +23,22 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
-        return ResponseEntity.ok(productService.getAllProducts());
+    public ResponseEntity<List<ProductResponseDto>> getAllProducts(
+            @RequestParam(required = false) String priceFrom,
+            @RequestParam(required = false) String priceTo,
+            @RequestParam(required = false) List<Integer> pizzaTypes,
+            @RequestParam(required = false) List<Integer> sizes,
+            @RequestParam(required = false) List<Long> ingredients
+    ) {
+        var filter = ProductFilter.builder()
+            .priceFrom(parseBigDecimal(priceFrom))
+            .priceTo(parseBigDecimal(priceTo))
+            .pizzaTypes(pizzaTypes)
+            .sizes(sizes)
+            .ingredientIds(ingredients)
+            .build();
+
+        return ResponseEntity.ok(productService.getAllProducts(filter));
     }
 
     @GetMapping("/{id}")
@@ -66,6 +83,14 @@ public class ProductController {
     ){
         productService.deleteProductById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductResponseDto>> searchProducts(
+            @RequestParam String query,
+            @RequestParam(required = false, defaultValue = "5") String limit
+    ) {
+        return ResponseEntity.ok(productService.searchProducts(query, limit));
     }
 
 }
