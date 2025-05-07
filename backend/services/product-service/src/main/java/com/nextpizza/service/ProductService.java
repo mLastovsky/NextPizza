@@ -5,7 +5,6 @@ import com.nextpizza.dto.ProductResponseDto;
 import com.nextpizza.dto.ProductUpdateDto;
 import com.nextpizza.dto.ProductFilterDto;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
