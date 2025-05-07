@@ -9,6 +9,6 @@ public record ProductFilterDto(
         BigDecimal priceTo,
         List<Integer> pizzaTypes,
         List<Integer> sizes,
-        List<Long> ingredientIds
+        List<Long> ingredients
 ) {
 }
