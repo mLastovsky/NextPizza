@@ -3,14 +3,16 @@ package com.nextpizza.service;
 import com.nextpizza.dto.ProductRequestDto;
 import com.nextpizza.dto.ProductResponseDto;
 import com.nextpizza.dto.ProductUpdateDto;
-import com.nextpizza.model.ProductFilter;
+import com.nextpizza.dto.ProductFilterDto;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface ProductService {
 
-    List<ProductResponseDto> getAllProducts(ProductFilter filter);
+    List<ProductResponseDto> getFilteredProducts(@Valid ProductFilterDto filter, Pageable pageable);
 
     ProductResponseDto getProductsById(Long id);
 
