@@ -1,6 +1,5 @@
 package com.nextpizza.model;
 
-import com.nextpizza.service.ProductService;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -26,7 +25,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category",  cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> product;
+    private List<Product> products;
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
