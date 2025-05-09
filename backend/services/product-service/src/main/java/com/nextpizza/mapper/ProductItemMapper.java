@@ -9,15 +9,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ProductItemMapper {
 
-    private final ProductMapper productMapper;
-
     public ProductItemResponseDto fromProductItem(ProductItem productItem) {
         return new ProductItemResponseDto(
                 productItem.getId(),
                 productItem.getSize(),
                 productItem.getPrice(),
-                productItem.getDoughType() != null? productItem.getDoughType().getType() : null,
-                productMapper.fromProduct(productItem.getProduct())
+                productItem.getDoughType() != null? productItem.getDoughType().getType() : null
         );
     }
 

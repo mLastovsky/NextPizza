@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class ProductMapper {
 
     private final IngredientMapper ingredientMapper;
+    private final ProductItemMapper productItemMapper;
 
     public ProductResponseDto fromProduct(Product product) {
         return new ProductResponseDto(
@@ -22,6 +23,9 @@ public class ProductMapper {
                 product.getIngredients().stream()
                         .map(ProductIngredient::getIngredient)
                         .map(ingredientMapper::fromIngredient)
+                        .toList(),
+                product.getProductItems().stream()
+                        .map(productItemMapper::fromProductItem)
                         .toList(),
                 product.getCreatedAt(),
                 product.getUpdatedAt()

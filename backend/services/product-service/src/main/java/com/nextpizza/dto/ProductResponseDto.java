@@ -9,6 +9,7 @@ public record ProductResponseDto(
         String name,
         String imageUrl,
         List<IngredientResponseDto> ingredients,
+        List<ProductItemResponseDto> items,
         OffsetDateTime createdAt,
         OffsetDateTime updatedAt
 ) {
