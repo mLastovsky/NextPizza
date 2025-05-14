@@ -1,12 +1,15 @@
 package com.nextpizza.repository.specification;
 
-import com.nextpizza.model.Product;
 import jakarta.persistence.criteria.*;
 
 import java.util.List;
 
-public interface FilterSpecification {
+public interface FilterSpecification<T> {
 
-    void applyFilter(List<Predicate> predicates, Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder cb);
+    void applyFilter(List<Predicate> predicates,
+                     Root<T> root,
+                     CriteriaQuery<?> query,
+                     CriteriaBuilder cb
+    );
 
 }
