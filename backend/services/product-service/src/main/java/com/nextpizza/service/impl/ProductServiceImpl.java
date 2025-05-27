@@ -12,7 +12,6 @@ import com.nextpizza.dto.ProductFilterDto;
 import com.nextpizza.repository.CategoryRepository;
 import com.nextpizza.repository.ProductRepository;
 import com.nextpizza.service.ProductService;
-import com.nextpizza.repository.specification.ProductSpecifications;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +33,8 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final CategoryRepository categoryRepository;
+
+    //TODO: реализовать фильтрацию (по необходимости)
 
     @Override
     public List<ProductResponseDto> getFilteredProducts(@Valid ProductFilterDto filter, Pageable pageable) {
