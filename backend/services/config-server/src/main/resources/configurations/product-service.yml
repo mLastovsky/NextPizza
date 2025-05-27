@@ -5,16 +5,24 @@ spring:
     password:
     driver-class-name: org.postgresql.Driver
 
-    jpa:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
       hibernate:
-        ddl-auto: validate
-      database: postgresql
-      database-platform: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-    flyway:
-      url: ${spring.datasource.url}
-      user: ${spring.datasource.username}
-      password: ${spring.datasource.password}
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+
+logging:
+  level:
+    root: info
 
 springdoc:
   api-docs:
