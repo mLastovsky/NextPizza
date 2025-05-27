@@ -12,10 +12,11 @@ import com.nextpizza.dto.ProductFilterDto;
 import com.nextpizza.repository.CategoryRepository;
 import com.nextpizza.repository.ProductRepository;
 import com.nextpizza.service.ProductService;
-import com.nextpizza.repository.specification.ProductSpecificationBuilder;
+import com.nextpizza.repository.specification.ProductSpecifications;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ import static java.lang.String.format;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
@@ -35,9 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductResponseDto> getFilteredProducts(@Valid ProductFilterDto filter, Pageable pageable) {
-        var specification = ProductSpecificationBuilder.build(filter);
-
-        return productRepository.findAll(specification, pageable)
+        return productRepository.findAll(pageable)
                 .map(productMapper::fromProduct)
                 .getContent();
     }
