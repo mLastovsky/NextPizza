@@ -14,7 +14,7 @@ public class ProductItemMapper {
                 productItem.getId(),
                 productItem.getSize(),
                 productItem.getPrice(),
-                productItem.getDoughType() != null? productItem.getDoughType().getType() : null
+                productItem.getDoughType() != null? productItem.getDoughType().getId() : null
         );
     }
 
