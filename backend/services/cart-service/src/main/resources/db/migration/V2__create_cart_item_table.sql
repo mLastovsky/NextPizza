@@ -1,0 +1,9 @@
+CREATE TABLE cart_item (
+    id BIGSERIAL PRIMARY KEY,
+    cart_id BIGINT,
+    product_item_id BIGINT NOT NULL,
+    quantity BIGINT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE
+    CONSTRAINT fk_cart_id FOREIGN KEY (cart_id) REFERENCES cart (id) ON DELETE CASCADE,
+);
