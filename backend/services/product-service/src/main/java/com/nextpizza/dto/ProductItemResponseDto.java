@@ -7,6 +7,6 @@ public record ProductItemResponseDto(
         Long id,
         Long size,
         BigDecimal price,
-        String doughType
+        String pizzaType
 ) {
 }
