@@ -31,5 +31,10 @@ spring:
           predicates:
             - Path=/api/v1/categories/**
 
+        - id: dough-type-service-route
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/dough-types/**
+
 server:
   port: 8222
