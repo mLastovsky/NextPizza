@@ -36,5 +36,15 @@ spring:
           predicates:
             - Path=/api/v1/dough-types/**
 
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders: "*"
+            allowCredentials: true
+            allowedMethods: GET, POST, DELETE, PUT, OPTIONS
+
 server:
   port: 8222
