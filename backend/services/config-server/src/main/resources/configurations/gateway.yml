@@ -7,27 +7,27 @@ spring:
 
       routes:
         - id: user-service
-          uri: lb:http://USER-SERVICE
+          uri: lb://USER-SERVICE
           predicates:
             - Path=/api/v1/users/**
 
         - id: product-service
-          uri: lb:http://PRODUCT-SERVICE
+          uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/products/**
 
         - id: ingredients-service
-          uri: lb:http://PRODUCT-SERVICE
+          uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/ingredients/**
 
         - id: product-items-service
-          uri: lb:http://PRODUCT-SERVICE
+          uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/product-items/**
 
         - id: categories-service
-          uri: lb:http://PRODUCT-SERVICE
+          uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/categories/**
 
