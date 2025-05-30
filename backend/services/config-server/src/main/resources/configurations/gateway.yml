@@ -6,27 +6,27 @@ spring:
           enabled: true
 
       routes:
-        - id: user-service
+        - id: user-service-route
           uri: lb://USER-SERVICE
           predicates:
             - Path=/api/v1/users/**
 
-        - id: product-service
+        - id: product-service-route
           uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/products/**
 
-        - id: ingredients-service
+        - id: ingredients-service-route
           uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/ingredients/**
 
-        - id: product-items-service
+        - id: product-items-service-route
           uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/product-items/**
 
-        - id: categories-service
+        - id: categories-service-route
           uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/categories/**
