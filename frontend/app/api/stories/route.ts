@@ -1,12 +1,7 @@
-// import { prisma } from '@/prisma/prisma-client';
-// import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-// export async function GET() {
-//   const stories = await prisma.story.findMany({
-//     include: {
-//       items: true,
-//     },
-//   });
+export async function GET() {
+  const mockStories = [{}];
 
-//   return NextResponse.json(stories);
-// }
+  return NextResponse.json(mockStories);
+}

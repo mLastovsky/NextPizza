@@ -1,17 +1,17 @@
-// import { Cart, CartItem, Ingredient, Product, ProductItem } from '@prisma/client';
+import { Cart, CartItem, Ingredient, Product, ProductItem } from "@/dto/models";
 
-// export type CartItemDTO = CartItem & {
-//   productItem: ProductItem & {
-//     product: Product;
-//   };
-//   ingredients: Ingredient[];
-// };
+export type CartItemDTO = CartItem & {
+  productItem: ProductItem & {
+    product: Product;
+  };
+  ingredients: Ingredient[];
+};
 
-// export interface CartDTO extends Cart {
-//   items: CartItemDTO[];
-// }
+export interface CartDTO extends Cart {
+  items: CartItemDTO[];
+}
 
-// export interface CreateCartItemValues {
-//   productItemId: number;
-//   ingredients?: number[];
-// }
+export interface CreateCartItemValues {
+  productItemId: number;
+  ingredients?: number[];
+}

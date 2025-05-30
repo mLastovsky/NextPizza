@@ -1,4 +1,4 @@
-import { updateCartTotalAmount } from "@/shared/lib/update-cart-total-amount";
+// import { updateCartTotalAmount } from "@/shared/lib/update-cart-total-amount";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
@@ -14,6 +14,8 @@ export async function PATCH(
       return NextResponse.json({ error: "Cart token not found" });
     }
 
+    // Закомментирован код работы с Prisma
+    /*
     const cartItem = await prisma.cartItem.findFirst({
       where: {
         id,
@@ -34,8 +36,10 @@ export async function PATCH(
     });
 
     const updatedUserCart = await updateCartTotalAmount(token);
+    */
 
-    return NextResponse.json(updatedUserCart);
+    // Возвращаем заглушку вместо реальных данных
+    return NextResponse.json({ message: "Cart updated (stub)" });
   } catch (error) {
     console.log("[CART_PATCH] Server error", error);
     return NextResponse.json(
@@ -57,6 +61,8 @@ export async function DELETE(
       return NextResponse.json({ error: "Cart token not found" });
     }
 
+    // Закомментирован код работы с Prisma
+    /*
     const cartItem = await prisma.cartItem.findFirst({
       where: {
         id: Number(params.id),
@@ -74,8 +80,10 @@ export async function DELETE(
     });
 
     const updatedUserCart = await updateCartTotalAmount(token);
+    */
 
-    return NextResponse.json(updatedUserCart);
+    // Возвращаем заглушку вместо реальных данных
+    return NextResponse.json({ message: "Cart item deleted (stub)" });
   } catch (error) {
     console.log("[CART_DELETE] Server error", error);
     return NextResponse.json(
