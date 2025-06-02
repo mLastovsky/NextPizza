@@ -1,8 +1,12 @@
 package com.nextpizza.exception;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class UserNotCreatedException extends RuntimeException {
 
-    public UserNotCreatedException(String message) {
-        super(message);
-    }
+    private final String message;
+
 }
