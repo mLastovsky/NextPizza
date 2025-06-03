@@ -9,3 +9,9 @@ spring:
   cloud:
     config:
       override.system-property: false
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9999/realms/nextpizza
