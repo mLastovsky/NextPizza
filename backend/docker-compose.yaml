@@ -9,7 +9,7 @@ services:
       PGDATA: /data/postgres
     volumes:
       - postgres_data:/data/postgres
-      - ./postgres/init:/docker-entrypoint-initdb.d
+      - ./initial_data/postgres/:/docker-entrypoint-initdb.d
     ports:
       - "5433:5432"
     healthcheck:
@@ -25,11 +25,11 @@ services:
     image: quay.io/keycloak/keycloak:26.2.5
     container_name: keycloak
     env_file: ./.env
-    command: "start-dev"
+    command: "start-dev --import-realm"
     environment:
       KC_HTTP_PORT: 9999
-      KEYCLOAK_BOOTSTRAP_ADMIN: ${KEYCLOAK_ADMIN}
-      KEYCLOAK_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_DB_VENDOR: postgres
       KC_DB_URL_HOST: postgres
       KC_DB_URL_PORT: 5432
@@ -37,6 +37,8 @@ services:
       KC_DB_USERNAME: ${POSTGRES_USER}
       KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
       KC_HEALTH_ENABLED: "true"
+    volumes:
+      - ./initial_data/keycloak/:/opt/keycloak/data/import
     ports:
       - "9999:9999"
     healthcheck:
