@@ -1,6 +1,3 @@
--- Keycloak
-CREATE DATABASE postgres;
-
 -- Product-service
 CREATE DATABASE products_repository;
 
