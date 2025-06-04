@@ -1,19 +1,23 @@
 package com.nextpizza.service;
 
 
-import com.nextpizza.dto.UserAuthDTO;
-import com.nextpizza.dto.UserRegistrationDTO;
-import com.nextpizza.security.UserDetailsImpl;
+import com.nextpizza.dto.UserUpdateDto;
+import com.nextpizza.dto.UserResponseDto;
+import jakarta.validation.Valid;
+import org.springframework.security.oauth2.jwt.Jwt;
+
+import java.util.UUID;
 
 public interface UserService {
 
-    void register(UserRegistrationDTO userRegistrationDTO);
+    UserResponseDto getMe(Jwt jwt);
 
-    void update(UserRegistrationDTO userRegistrationDTO);
+    UserResponseDto getById(UUID id);
 
-    void deleteByEmail(String email);
+    UserResponseDto update(@Valid UserUpdateDto userUpdateDto, Jwt jwt);
 
-    String getToken(UserAuthDTO userAuthDTO);
+    void delete(UUID id);
 
-    UserDetailsImpl getUserDetails();
+    UserResponseDto syncFromToken(Jwt jwt);
+
 }
