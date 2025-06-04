@@ -12,19 +12,8 @@ spring:
       database-platform: org.hibernate.dialect.PostgreSQLDialect
 
     flyway:
-      url: ${spring.datasource.url}
       user: ${spring.datasource.username}
       password: ${spring.datasource.password}
-
-springdoc:
-  api-docs:
-    enabled: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
 
 server:
   port: 8030
