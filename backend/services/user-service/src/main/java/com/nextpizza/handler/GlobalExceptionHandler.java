@@ -1,6 +1,6 @@
 package com.nextpizza.handler;
 
-import com.nextpizza.exception.UserNotCreatedException;
+import com.nextpizza.dto.ErrorResponseDto;
 import com.nextpizza.exception.UserNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.OffsetDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,62 +20,67 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<?> handleAccessDeniedException(AccessDeniedException exception) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                new ExceptionResponseStructure(
+    public ResponseEntity<ErrorResponseDto> handleAccessDeniedException(AccessDeniedException exception) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(new ErrorResponseDto(
                         OffsetDateTime.now(),
-                        HttpStatus.UNAUTHORIZED.value(),
+                        "Unauthorized",
                         "Lack of access",
-                        exception.getMessage()
-                ));
-    }
-
-    @ExceptionHandler(UserNotCreatedException.class)
-    public ResponseEntity<?> handleUserNotCreatedException(UserNotCreatedException exception) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                new ExceptionResponseStructure(
-                        OffsetDateTime.now(),
-                        HttpStatus.BAD_REQUEST.value(),
-                        "User not created",
-                        exception.getMessage()
+                        Collections.singletonList(exception.getMessage())
                 ));
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<?> handleUserNotFoundException(UserNotFoundException exception) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                new ExceptionResponseStructure(
+    public ResponseEntity<ErrorResponseDto> handleUserNotFoundException(UserNotFoundException exception) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponseDto(
                         OffsetDateTime.now(),
-                        HttpStatus.NOT_FOUND.value(),
+                        "Not Found",
                         "User not found",
-                        exception.getMessage()
+                        Collections.singletonList(exception.getMessage())
                 ));
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<?> handleBadCredentialsException(BadCredentialsException exception) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                new ExceptionResponseStructure(
+    public ResponseEntity<ErrorResponseDto> handleBadCredentialsException(BadCredentialsException exception) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(new ErrorResponseDto(
                         OffsetDateTime.now(),
-                        HttpStatus.UNAUTHORIZED.value(),
+                        "Unauthorized",
                         "Incorrect username or password",
-                        exception.getMessage()
+                        Collections.singletonList(exception.getMessage())
                 ));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
-        List<String> defaultMessage = exception.getBindingResult().getFieldErrors()
+    public ResponseEntity<ErrorResponseDto> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+        List<String> details = exception.getBindingResult().getFieldErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                new ExceptionResponseStructure(
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponseDto(
                         OffsetDateTime.now(),
-                        HttpStatus.BAD_REQUEST.value(),
+                        "Bad Request",
                         "Incorrect data",
-                        defaultMessage
+                        details
+                ));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponseDto> handleGenericException(Exception exception) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ErrorResponseDto(
+                        OffsetDateTime.now(),
+                        "Internal Server Error",
+                        "Unexpected error occurred",
+                        Collections.singletonList(exception.getMessage())
                 ));
     }
 }
