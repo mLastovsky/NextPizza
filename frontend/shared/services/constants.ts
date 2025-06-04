@@ -4,4 +4,5 @@ export enum ApiRoutes {
   CATEGORIES = "categories",
   PRODUCTS = "products",
   TYPES = "dough-types",
+  CART = "carts",
 }
