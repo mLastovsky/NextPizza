@@ -46,6 +46,21 @@ spring:
           predicates:
             - Path=/api/v1/dough-types/**
 
+        - id: cart-service-route
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/api/v1/carts/**
+
+        - id: cart-service-swagger
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/cart-service/**
+
+        - id: cart-items-service-route
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/api/v1/cart-items/**
+
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
         - TokenRelay=
