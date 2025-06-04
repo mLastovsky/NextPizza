@@ -20,19 +20,5 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
 
-logging:
-  level:
-    root: info
-
-springdoc:
-  api-docs:
-    enabled: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
 server:
   port: 8020
