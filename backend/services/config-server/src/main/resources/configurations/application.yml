@@ -19,8 +19,10 @@ spring:
 springdoc:
   api-docs:
     enabled: true
+    path: /${spring.application.name}/v3/api-docs
   swagger-ui:
     enabled: true
+    path: /swagger-ui
 
 management:
   endpoints:

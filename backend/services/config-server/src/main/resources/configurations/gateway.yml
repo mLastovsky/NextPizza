@@ -11,10 +11,20 @@ spring:
           predicates:
             - Path=/api/v1/users/**
 
+        - id: user-service-swagger
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/**
+
         - id: product-service-route
           uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/products/**
+
+        - id: user-service-swagger
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/product-service/**
 
         - id: ingredients-service-route
           uri: lb://PRODUCT-SERVICE
@@ -38,6 +48,8 @@ spring:
 
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - TokenRelay=
+
       globalcors:
         cors-configurations:
           '[/**]':
@@ -45,6 +57,24 @@ spring:
             allowedHeaders: "*"
             allowCredentials: true
             allowedMethods: GET, POST, DELETE, PUT, OPTIONS
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    urls:
+      - name: gateway
+        url: /v3/api-docs
+
+      - name: product-service
+        url: /product-service/v3/api-docs
+
+      - name: user-service
+        url: /user-service/v3/api-docs
+
+      - name: cart-service
+        url: /cart-service/v3/api-docs
 
 server:
   port: 8222
