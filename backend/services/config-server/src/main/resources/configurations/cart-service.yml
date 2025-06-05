@@ -16,9 +16,14 @@ spring:
       password: ${spring.datasource.password}
 
 application:
-  config:
-    product-service-url: http://localhost:8222/api/v1/products
-    user-service-url: http://localhost:8222/api/v1/users
+    product-service:
+      url: http://localhost:8222/api/v1/products
+
+    user-service:
+      url: http://localhost:8222/api/v1/users
+
+    ingredient-service:
+      url: http://localhost:8222/api/v1/ingredients
 
 server:
   port: 8030
