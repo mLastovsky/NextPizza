@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  updateCartItemQuantity,
+  updateCartItemQuantity as updateCartItemQuantity,
   deleteCartItem,
-} from "@/shared/services/carts";
+  getCartItem,
+} from "@/shared/services/cart";
+import { updateCartTotalAmount } from "@/shared/lib/update-cart-total-amount";
 
 export async function PATCH(
   req: NextRequest,
@@ -20,9 +22,17 @@ export async function PATCH(
       );
     }
 
-    const result = await updateCartItemQuantity(id, data.quantity, token);
+    const cartItem = await getCartItem(id);
 
-    return NextResponse.json(result);
+    if (!cartItem) {
+      return NextResponse.json({ error: "Cart item not found" });
+    }
+
+    updateCartItemQuantity(id, data.quantity);
+
+    const updatedUserCart = await updateCartTotalAmount(token);
+
+    return NextResponse.json(updatedUserCart);
   } catch (error) {
     console.error("[CART_PATCH] Ошибка при обновлении корзины:", error);
     return NextResponse.json(

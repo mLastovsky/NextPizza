@@ -1,5 +1,7 @@
 package com.nextpizza.service.impl;
 
+import com.nextpizza.dto.CartCreatedResponseDto;
+import com.nextpizza.dto.CartRequestDto;
 import com.nextpizza.dto.CartResponseDto;
 import com.nextpizza.mapper.CartMapper;
 import com.nextpizza.repository.CartRepository;
@@ -19,8 +21,12 @@ public class CartServiceImpl implements CartService {
     private final CartMapper cartMapper;
 
     @Override
-    public List<CartResponseDto> getAllCarts() {
-        return List.of();
+    public CartResponseDto getCartByToken(String token) {
+        return null;
     }
 
+    @Override
+    public CartCreatedResponseDto addItemToCart(CartRequestDto cartRequestDto, String token) {
+        return null;
+    }
 }

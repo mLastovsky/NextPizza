@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { addToCart, getCart } from "@/shared/services/carts";
+import { addToCart, getCart } from "@/shared/services/cart";
 import { CreateCartItemValues } from "@/dto/models";
 
 export async function GET(req: NextRequest) {
   try {
     const token = req.cookies.get("cartToken")?.value;
+
+    if (!token) {
+      return NextResponse.json({ totalAmount: 0, items: [] });
+    }
 
     const cart = await getCart(token);
 

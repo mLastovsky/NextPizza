@@ -8,6 +8,7 @@ public record ProductItemResponseDto(
         Long id,
         Long size,
         BigDecimal price,
-        Long pizzaType
+        Long pizzaType,
+        ProductResponseDto product
 ) implements Serializable {
 }

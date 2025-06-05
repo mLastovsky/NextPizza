@@ -14,13 +14,21 @@ export const getCart = async (token?: string): Promise<CartDTO> => {
   return response.data;
 };
 
+export const getCartItem = async (id: number): Promise<CartDTO> => {
+  const response = await axiosInstance.get<CartDTO>(
+    `${ApiRoutes.CART_ITEMS}/${id}`
+  );
+
+  return response.data;
+};
+
 /**
  * Добавление товара в корзину.
  */
 export const addToCart = async (
   data: CreateCartItemValues,
   token?: string
-): Promise<{ token: string; message: string }> => {
+): Promise<CartDTO> => {
   const response = await axiosInstance.post(ApiRoutes.CART, data, {
     headers: token ? { Cookie: `cartToken=${token}` } : undefined,
     withCredentials: true,
@@ -34,17 +42,20 @@ export const addToCart = async (
  */
 export const updateCartItemQuantity = async (
   id: number,
-  quantity: number,
-  token?: string
-): Promise<{ message: string }> => {
-  const response = await axiosInstance.patch(
-    `${ApiRoutes.CART}/${id}`,
-    { quantity },
-    {
-      headers: token ? { Cookie: `cartToken=${token}` } : undefined,
-      withCredentials: true,
-    }
-  );
+  quantity: number
+): Promise<void> => {
+  await axiosInstance.patch(`${ApiRoutes.CART}/${id}`, {
+    quantity,
+  });
+};
+
+export const updateTotalAmount = async (
+  id: number,
+  totalAmount: number
+): Promise<CartDTO> => {
+  const response = await axiosInstance.patch(`${ApiRoutes.CART}/${id}`, {
+    totalAmount,
+  });
 
   return response.data;
 };
@@ -55,7 +66,7 @@ export const updateCartItemQuantity = async (
 export const deleteCartItem = async (
   id: number,
   token?: string
-): Promise<{ message: string }> => {
+): Promise<CartDTO> => {
   const response = await axiosInstance.delete(`${ApiRoutes.CART}/${id}`, {
     headers: token ? { Cookie: `cartToken=${token}` } : undefined,
     withCredentials: true,

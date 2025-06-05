@@ -1,11 +1,11 @@
 package com.nextpizza.service;
 
-import com.nextpizza.dto.CartItemResponseDto;
-
-import java.util.List;
+import com.nextpizza.dto.CartItemUpdateDto;
 
 public interface CartItemService {
 
-    List<CartItemResponseDto> getAllCartItems();
+    void deleteCartItem(Long id, String token);
+
+    void updateCartItem(Long id, CartItemUpdateDto cartItemUpdateDto, String token);
 
 }
