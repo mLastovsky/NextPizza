@@ -40,6 +40,7 @@ public class Cart {
 
     @Builder.Default
     @OneToMany(mappedBy = "cart",  cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("createdAt DESC")
     private List<CartItem> cartItems = new ArrayList<>();
 
 }
