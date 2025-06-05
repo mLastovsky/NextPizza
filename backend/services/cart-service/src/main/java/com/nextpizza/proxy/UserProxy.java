@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @FeignClient(
         name = "user-service",
-        url = "${application.config.user-service-url}"
+        url = "${application.user-service.url}"
 )
 @Component
 public interface UserProxy {
