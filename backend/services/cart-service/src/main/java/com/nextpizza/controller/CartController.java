@@ -1,6 +1,5 @@
 package com.nextpizza.controller;
 
-import com.nextpizza.dto.CartCreatedResponseDto;
 import com.nextpizza.dto.CartResponseDto;
 import com.nextpizza.dto.CreateCartItemDto;
 import com.nextpizza.service.CartService;
