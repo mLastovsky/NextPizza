@@ -1,5 +1,6 @@
 package com.nextpizza.proxy;
 
+import com.nextpizza.dto.ProductItemResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,5 +17,8 @@ public interface ProductItemProxy {
 
     @GetMapping("/{id}/price")
     BigDecimal getProductPriceById(@PathVariable Long id);
+
+    @GetMapping("/{id}")
+    ProductItemResponseDto getProductItemById(@PathVariable Long id);
 
 }
