@@ -11,4 +11,6 @@ public interface CartService {
 
     CartResponseDto addItemToCart(@Valid CreateCartItemDto createCartItemDto, String token, HttpServletResponse response);
 
+    CartResponseDto calculateCartTotalAmount(String token);
+
 }
