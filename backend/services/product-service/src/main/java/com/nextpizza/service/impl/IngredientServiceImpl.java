@@ -48,4 +48,11 @@ public class IngredientServiceImpl implements IngredientService {
                 ));
     }
 
+    @Override
+    public List<IngredientResponseDto> getIngredientsByIds(List<Long> ids) {
+        return ingredientRepository.findByIdIn(ids).stream()
+                .map(ingredientMapper::fromIngredient)
+                .toList();
+    }
+
 }

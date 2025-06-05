@@ -13,4 +13,6 @@ public interface IngredientService {
 
     BigDecimal getIngredientPriceById(Long id);
 
+    List<IngredientResponseDto> getIngredientsByIds(List<Long> ids);
+
 }

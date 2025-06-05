@@ -24,6 +24,13 @@ public class IngredientController {
         return ResponseEntity.ok(ingredientService.getAllIngredients());
     }
 
+    @GetMapping
+    public ResponseEntity<List<IngredientResponseDto>> getIngredientsByIds(
+            @PathVariable List<Long> ids
+    ) {
+        return ResponseEntity.ok(ingredientService.getIngredientsByIds(ids));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<IngredientResponseDto> getIngredientById(
             @PathVariable Long id
