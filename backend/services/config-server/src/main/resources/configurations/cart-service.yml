@@ -16,8 +16,8 @@ spring:
       password: ${spring.datasource.password}
 
 application:
-    product-service:
-      url: http://localhost:8222/api/v1/products
+    product-item-service:
+      url: http://localhost:8222/api/v1/product-items
 
     user-service:
       url: http://localhost:8222/api/v1/users

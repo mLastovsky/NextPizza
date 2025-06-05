@@ -7,7 +7,7 @@ import com.nextpizza.model.Cart;
 import com.nextpizza.model.CartItem;
 import com.nextpizza.model.IngredientCartItem;
 import com.nextpizza.proxy.IngredientProxy;
-import com.nextpizza.proxy.ProductProxy;
+import com.nextpizza.proxy.ProductItemProxy;
 import com.nextpizza.repository.CartItemRepository;
 import com.nextpizza.repository.CartRepository;
 import com.nextpizza.repository.IngredientCartItemRepository;
@@ -34,7 +34,7 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final CartMapper cartMapper;
     private final CartItemRepository cartItemRepository;
-    private final ProductProxy productProxy;
+    private final ProductItemProxy productItemProxy;
     private final IngredientProxy ingredientProxy;
     private final IngredientCartItemRepository ingredientCartItemRepository;
 
@@ -183,7 +183,7 @@ public class CartServiceImpl implements CartService {
     }
 
     private BigDecimal calculateItemTotalPrice(CartItem item) {
-        var basePrice = productProxy.getProductPriceById(item.getProductItemId());
+        var basePrice = productItemProxy.getProductPriceById(item.getProductItemId());
 
         var ingredientIds = cartItemRepository.findIngredientIdsByCartItemId(item.getId());
 

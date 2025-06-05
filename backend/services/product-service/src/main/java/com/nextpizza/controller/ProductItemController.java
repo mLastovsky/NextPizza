@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -28,6 +29,13 @@ public class ProductItemController {
             @PathVariable Long id
     ) {
         return ResponseEntity.ok(productItemService.getProductItemById(id));
+    }
+
+    @GetMapping("/{id}/price")
+    public ResponseEntity<BigDecimal> getProductPriceById(
+            @PathVariable Long id
+    ){
+        return ResponseEntity.ok(productItemService.getProductPriceById(id));
     }
 
 }
