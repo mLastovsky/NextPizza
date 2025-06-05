@@ -2,8 +2,9 @@ package com.nextpizza.controller;
 
 import com.nextpizza.dto.CartCreatedResponseDto;
 import com.nextpizza.dto.CartResponseDto;
-import com.nextpizza.dto.CartRequestDto;
+import com.nextpizza.dto.CreateCartItemDto;
 import com.nextpizza.service.CartService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +22,15 @@ public class CartController {
             @CookieValue(value = "cartToken", required = false) String token
     ) {
         return ResponseEntity.ok(cartService.getCartByToken(token));
-        //нужно отсортировать по created: desc
-        // тут токен всегда есть его не может не быть
     }
 
     @PostMapping
-    public ResponseEntity<CartCreatedResponseDto> addItemToCart(
-            @RequestBody @Valid CartRequestDto cartRequestDto,
-            @CookieValue(value = "cartToken", required = false) String token
+    public ResponseEntity<CartResponseDto> addItemToCart(
+            @RequestBody @Valid CreateCartItemDto createCartItemDto,
+            @CookieValue(value = "cartToken", required = false) String token,
+            HttpServletResponse response
     ) {
-        return ResponseEntity.ok(cartService.addItemToCart(cartRequestDto, token));
-    } // тут должны загенерить токен если его нет и тоже возращать cartResponseDto CartDTO
-    //productItemId: number;
-    //  ingredients?: number[];
+        return ResponseEntity.ok(cartService.addItemToCart(createCartItemDto, token, response));
+    }
+
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public record CartResponseDto(
 
         Long id,
-        Long userId,
+        UserResponseDto user,
         BigDecimal totalAmount,
         String token,
         OffsetDateTime createdAt,
