@@ -1,7 +1,7 @@
 package com.nextpizza.controller;
 
 import com.nextpizza.dto.CartItemUpdateDto;
-import com.nextpizza.dto.MessageResponseDto;
+import com.nextpizza.dto.CartResponseDto;
 import com.nextpizza.service.CartItemService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,26 +17,24 @@ public class CartItemController {
     private final CartItemService cartItemService;
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> updateItemQuantity(
+    public ResponseEntity<CartResponseDto> updateItemQuantity(
             @PathVariable Long id,
-            @ModelAttribute @Valid CartItemUpdateDto cartItemUpdateDto,
+            @RequestBody @Valid CartItemUpdateDto cartItemUpdateDto,
             @CookieValue(value = "cartToken", required = false) String token
     ) {
-        cartItemService.updateCartItem(id, cartItemUpdateDto, token);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .build();
+                .body(cartItemService.updateCartItem(id, cartItemUpdateDto, token));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<MessageResponseDto> deleteItem(
+    public ResponseEntity<CartResponseDto> deleteItem(
             @PathVariable Long id,
             @CookieValue(value = "cartToken", required = false) String token
     ) {
-        cartItemService.deleteCartItem(id, token);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
-                .build();
+                .body(cartItemService.deleteCartItem(id, token));
     }
 
 }
