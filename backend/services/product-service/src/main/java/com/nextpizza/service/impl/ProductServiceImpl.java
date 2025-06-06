@@ -39,33 +39,33 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductResponseDto> getFilteredProducts(@Valid ProductFilterDto filter, Pageable pageable) {
         return productRepository.findAll(pageable)
-                .map(productMapper::fromProduct)
+                .map(productMapper::toDto)
                 .getContent();
     }
 
     @Override
     public ProductResponseDto getProductsById(Long id) {
-        return productMapper.fromProduct(findProductByIdOrThrow(id));
+        return productMapper.toDto(findProductByIdOrThrow(id));
     }
 
     @Override
     public ProductResponseDto createProduct(ProductRequestDto productRequestDto) {
-        var savedEntity = productRepository.save(productMapper.fromDto(productRequestDto));
-        return productMapper.fromProduct(savedEntity);
+        var savedEntity = productRepository.save(productMapper.toEntity(productRequestDto));
+        return productMapper.toDto(savedEntity);
     }
 
     @Override
     public ProductResponseDto fullyUpdateProduct(Long id, ProductUpdateDto productRequestDto) {
         var existingProduct = findProductByIdOrThrow(id);
         updateAllProductFields(existingProduct, productRequestDto);
-        return productMapper.fromProduct(productRepository.save(existingProduct));
+        return productMapper.toDto(productRepository.save(existingProduct));
     }
 
     @Override
     public ProductResponseDto partiallyUpdateProduct(Long id, ProductUpdateDto productRequestDto) {
         var existingProduct = findProductByIdOrThrow(id);
         updateNonNullProductFields(existingProduct, productRequestDto);
-        return productMapper.fromProduct(productRepository.save(existingProduct));
+        return productMapper.toDto(productRepository.save(existingProduct));
     }
 
     @Override
@@ -80,7 +80,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductResponseDto> searchProducts(String keyword, String limit) {
         return productRepository.findByNameContainingIgnoreCase(keyword, PageRequest.of(0, Integer.parseInt(limit)))
                 .stream()
-                .map(productMapper::fromProduct)
+                .map(productMapper::toDto)
                 .toList();
     }
 

@@ -21,7 +21,7 @@ public class DoughTypeServiceImpl implements DoughTypeService {
     @Override
     public List<DoughTypeResponseDto> getDoughTypes() {
         return doughTypeRepository.findAll().stream()
-                .map(doughTypeMapper::fromDoughType)
+                .map(doughTypeMapper::toDto)
                 .toList();
     }
 

@@ -7,7 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +31,10 @@ public class Ingredient {
     private String imageUrl;
 
     @CreatedDate
-    @Column(updatable = false, nullable = false)
-    private OffsetDateTime createdAt;
+    private Instant createdAt;
 
     @LastModifiedDate
-    @Column(insertable = false)
-    private OffsetDateTime updatedAt;
+    private Instant updatedAt;
 
     @Builder.Default
     @OneToMany(mappedBy = "ingredient")

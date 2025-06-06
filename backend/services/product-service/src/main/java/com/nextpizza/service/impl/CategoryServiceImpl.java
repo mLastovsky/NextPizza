@@ -26,7 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryResponseDto> getFilteredProducts(ProductFilterDto filter, Pageable pageable) {
         return categoryRepository.findAll(pageable)
                 .stream()
-                .map(categoryMapper::fromCategory)
+                .map(categoryMapper::toDto)
                 .toList();
     }
 

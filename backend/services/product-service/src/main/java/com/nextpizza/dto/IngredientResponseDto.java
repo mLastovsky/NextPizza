@@ -1,7 +1,7 @@
 package com.nextpizza.dto;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.Instant;
 
 public record IngredientResponseDto(
 
@@ -9,7 +9,7 @@ public record IngredientResponseDto(
         String name,
         BigDecimal price,
         String imageUrl,
-        OffsetDateTime createdAt,
-        OffsetDateTime updatedAt
+        Instant createdAt,
+        Instant updatedAt
 ) {
 }

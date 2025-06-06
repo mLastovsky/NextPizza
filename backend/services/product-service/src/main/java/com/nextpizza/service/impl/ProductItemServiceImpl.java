@@ -1,6 +1,7 @@
 package com.nextpizza.service.impl;
 
 import com.nextpizza.dto.ProductItemResponseDto;
+import com.nextpizza.dto.ProductItemWithProductResponseDto;
 import com.nextpizza.exception.ProductItemNotFoundException;
 import com.nextpizza.mapper.ProductItemMapper;
 import com.nextpizza.model.ProductItem;
@@ -26,14 +27,14 @@ public class ProductItemServiceImpl implements ProductItemService {
     @Override
     public List<ProductItemResponseDto> getAllProductItems() {
         return productItemRepository.findAll().stream()
-                .map(productItemMapper::fromProductItem)
+                .map(productItemMapper::toDto)
                 .toList();
     }
 
     @Override
-    public ProductItemResponseDto getProductItemById(Long id) {
+    public ProductItemWithProductResponseDto getProductItemById(Long id) {
         return productItemRepository.findById(id)
-                .map(productItemMapper::fromProductItem)
+                .map(productItemMapper::toWithProductDto)
                 .orElseThrow(()-> new ProductItemNotFoundException(
                         format("ProductItem with ID:: %d not found", id)
                 ));

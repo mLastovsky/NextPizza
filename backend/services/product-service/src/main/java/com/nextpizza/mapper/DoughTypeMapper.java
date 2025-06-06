@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DoughTypeMapper {
 
-    public DoughTypeResponseDto fromDoughType(DoughType doughType) {
+    public DoughTypeResponseDto toDto(DoughType doughType) {
         return new DoughTypeResponseDto(
                 doughType.getId(),
                 doughType.getType()

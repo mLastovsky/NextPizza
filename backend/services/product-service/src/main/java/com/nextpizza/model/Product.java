@@ -6,7 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,11 +33,11 @@ public class Product {
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
-    private OffsetDateTime createdAt;
+    private Instant createdAt;
 
     @LastModifiedDate
     @Column(insertable = false)
-    private OffsetDateTime updatedAt;
+    private Instant updatedAt;
 
     @Builder.Default
     @OneToMany(mappedBy = "product")

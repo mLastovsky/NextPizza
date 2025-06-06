@@ -2,7 +2,7 @@ package com.nextpizza.dto;
 
 import com.nextpizza.model.Role;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 public record UserResponseDto (
@@ -12,7 +12,7 @@ public record UserResponseDto (
         String email,
         Role role,
         String provider,
-        OffsetDateTime createdAt,
-        OffsetDateTime updatedAt
+        Instant createdAt,
+        Instant updatedAt
 ) {
 }

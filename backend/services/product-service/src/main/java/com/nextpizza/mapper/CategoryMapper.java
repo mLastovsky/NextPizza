@@ -11,12 +11,12 @@ public class CategoryMapper {
 
     private final ProductMapper productMapper;
 
-    public CategoryResponseDto fromCategory(Category category) {
+    public CategoryResponseDto toDto(Category category) {
         return new CategoryResponseDto(
                 category.getId(),
                 category.getName(),
                 category.getProducts().stream()
-                        .map(productMapper::fromProduct)
+                        .map(productMapper::toDto)
                         .toList(),
                 category.getCreatedAt(),
                 category.getUpdatedAt()

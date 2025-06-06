@@ -26,14 +26,14 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public List<IngredientResponseDto> getAllIngredients() {
         return ingredientRepository.findAll().stream()
-                .map(ingredientMapper::fromIngredient)
+                .map(ingredientMapper::toDto)
                 .toList();
     }
 
     @Override
     public IngredientResponseDto getIngredientById(Long id) {
         return ingredientRepository.findById(id)
-                .map(ingredientMapper::fromIngredient)
+                .map(ingredientMapper::toDto)
                 .orElseThrow(() -> new IngredientNotFoundException(
                         format("Ingredient with ID:: %d not found", id)
                 ));
@@ -51,7 +51,7 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public List<IngredientResponseDto> getIngredientsByIds(List<Long> ids) {
         return ingredientRepository.findByIdIn(ids).stream()
-                .map(ingredientMapper::fromIngredient)
+                .map(ingredientMapper::toDto)
                 .toList();
     }
 

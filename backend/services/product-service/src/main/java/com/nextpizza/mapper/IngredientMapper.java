@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class IngredientMapper {
 
-    public IngredientResponseDto fromIngredient(Ingredient ingredient) {
+    public IngredientResponseDto toDto(Ingredient ingredient) {
         return new IngredientResponseDto(
                 ingredient.getId(),
                 ingredient.getName(),

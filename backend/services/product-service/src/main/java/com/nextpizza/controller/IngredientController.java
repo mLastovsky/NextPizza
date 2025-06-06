@@ -4,10 +4,7 @@ import com.nextpizza.dto.IngredientResponseDto;
 import com.nextpizza.service.IngredientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,9 +21,9 @@ public class IngredientController {
         return ResponseEntity.ok(ingredientService.getAllIngredients());
     }
 
-    @GetMapping
+    @PostMapping("/by-ids")
     public ResponseEntity<List<IngredientResponseDto>> getIngredientsByIds(
-            @PathVariable List<Long> ids
+            @RequestBody List<Long> ids
     ) {
         return ResponseEntity.ok(ingredientService.getIngredientsByIds(ids));
     }

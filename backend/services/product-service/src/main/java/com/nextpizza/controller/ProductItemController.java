@@ -1,6 +1,7 @@
 package com.nextpizza.controller;
 
 import com.nextpizza.dto.ProductItemResponseDto;
+import com.nextpizza.dto.ProductItemWithProductResponseDto;
 import com.nextpizza.service.ProductItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ProductItemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductItemResponseDto> getProductItemById(
+    public ResponseEntity<ProductItemWithProductResponseDto> getProductItemById(
             @PathVariable Long id
     ) {
         return ResponseEntity.ok(productItemService.getProductItemById(id));

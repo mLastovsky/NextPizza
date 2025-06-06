@@ -4,7 +4,7 @@ import com.nextpizza.exception.CategoryNotFoundException;
 import com.nextpizza.exception.IngredientNotFoundException;
 import com.nextpizza.exception.ProductItemNotFoundException;
 import com.nextpizza.exception.ProductNotFoundException;
-import com.nextpizza.model.ErrorResponse;
+import com.nextpizza.dto.ErrorResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,14 +24,14 @@ import static java.lang.String.format;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductNotFound(
+    public ResponseEntity<ErrorResponseDto> handleProductNotFound(
             ProductNotFoundException ex,
             HttpServletRequest request
     ) {
         var pathInfo = getPathInfo(request);
         log.error("Product not found: {} | Path: {}", ex.getMsg(), pathInfo, ex);
 
-        var response = new ErrorResponse(
+        var response = new ErrorResponseDto(
                 OffsetDateTime.now(),
                 "Resource Not Found",
                 ex.getMsg(),
@@ -44,14 +44,14 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(IngredientNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleIngredientNotFound(
+    public ResponseEntity<ErrorResponseDto> handleIngredientNotFound(
             IngredientNotFoundException ex,
             HttpServletRequest request
     ) {
         var pathInfo = getPathInfo(request);
         log.error("Ingredient not found: {} | Path: {}", ex.getMsg(), pathInfo, ex);
 
-        var response = new ErrorResponse(
+        var response = new ErrorResponseDto(
                 OffsetDateTime.now(),
                 "Resource Not Found",
                 ex.getMsg(),
@@ -64,14 +64,14 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(CategoryNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleCategoryNotFound(
+    public ResponseEntity<ErrorResponseDto> handleCategoryNotFound(
             CategoryNotFoundException ex,
             HttpServletRequest request
     ) {
         var pathInfo = getPathInfo(request);
         log.error("Category not found: {} | Path: {}", ex.getMsg(), pathInfo, ex);
 
-        var response = new ErrorResponse(
+        var response = new ErrorResponseDto(
                 OffsetDateTime.now(),
                 "Resource Not Found",
                 ex.getMsg(),
@@ -84,14 +84,14 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProductItemNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductItemNotFound(
+    public ResponseEntity<ErrorResponseDto> handleProductItemNotFound(
             ProductItemNotFoundException ex,
             HttpServletRequest request
     ) {
         var pathInfo = getPathInfo(request);
         log.error("ProductItem not found: {} | Path: {}", ex.getMsg(), pathInfo, ex);
 
-        var response = new ErrorResponse(
+        var response = new ErrorResponseDto(
                 OffsetDateTime.now(),
                 "Resource Not Found",
                 ex.getMsg(),
@@ -104,7 +104,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidation(
+    public ResponseEntity<ErrorResponseDto> handleValidation(
             MethodArgumentNotValidException ex,
             HttpServletRequest request
     ) {
@@ -120,7 +120,7 @@ public class GlobalExceptionHandler {
                 errors,
                 ex);
 
-        var response = new ErrorResponse(
+        var response = new ErrorResponseDto(
                 OffsetDateTime.now(),
                 "Validation Failed",
                 "Request contains invalid fields",
@@ -133,7 +133,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleAll(
+    public ResponseEntity<ErrorResponseDto> handleAll(
             Exception ex,
             HttpServletRequest request
     ) {
@@ -143,7 +143,7 @@ public class GlobalExceptionHandler {
                 ex.getMessage(),
                 ex);
 
-        var response = new ErrorResponse(
+        var response = new ErrorResponseDto(
                 OffsetDateTime.now(),
                 "Internal Server Error",
                 "An unexpected error occurred",
