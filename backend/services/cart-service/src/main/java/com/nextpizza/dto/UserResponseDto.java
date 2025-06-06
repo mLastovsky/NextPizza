@@ -1,6 +1,6 @@
 package com.nextpizza.dto;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 
 public record UserResponseDto(
 
@@ -9,7 +9,7 @@ public record UserResponseDto(
         String email,
         String role,
         String provider,
-        OffsetDateTime createdAt,
-        OffsetDateTime updatedAt
+        Instant createdAt,
+        Instant updatedAt
 ) {
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.List;
 
 import static java.lang.String.format;
@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
         log.error("Product not found: {} | Path: {}", ex.getMessage(), pathInfo, ex);
 
         var response = new ErrorResponseDto(
-                OffsetDateTime.now(),
+                Instant.now(),
                 "Resource Not Found",
                 ex.getMessage(),
                 List.of(pathInfo)
@@ -51,7 +51,7 @@ public class GlobalExceptionHandler {
         log.error("Product not found: {} | Path: {}", ex.getMessage(), pathInfo, ex);
 
         var response = new ErrorResponseDto(
-                OffsetDateTime.now(),
+                Instant.now(),
                 "Resource Not Found",
                 ex.getMessage(),
                 List.of(pathInfo)
@@ -71,7 +71,7 @@ public class GlobalExceptionHandler {
         log.error("Product not found: {} | Path: {}", ex.getMessage(), pathInfo, ex);
 
         var response = new ErrorResponseDto(
-                OffsetDateTime.now(),
+                Instant.now(),
                 "Resource Not Found",
                 ex.getMessage(),
                 List.of(pathInfo)
@@ -100,7 +100,7 @@ public class GlobalExceptionHandler {
                 ex);
 
         var response = new ErrorResponseDto(
-                OffsetDateTime.now(),
+                Instant.now(),
                 "Validation Failed",
                 "Request contains invalid fields",
                 errors
@@ -123,7 +123,7 @@ public class GlobalExceptionHandler {
                 ex);
 
         var response = new ErrorResponseDto(
-                OffsetDateTime.now(),
+                Instant.now(),
                 "Internal Server Error",
                 "An unexpected error occurred",
                 List.of(pathInfo, ex.getMessage())

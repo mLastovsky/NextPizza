@@ -1,8 +1,7 @@
 package com.nextpizza.dto;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.List;
 
 
@@ -12,8 +11,8 @@ public record CartResponseDto(
         UserResponseDto user,
         BigDecimal totalAmount,
         String token,
-        OffsetDateTime createdAt,
-        OffsetDateTime updatedAt,
+        Instant createdAt,
+        Instant updatedAt,
         List<CartItemResponseDto> items
-) implements Serializable {
+) {
 }

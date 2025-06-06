@@ -1,6 +1,5 @@
 package com.nextpizza.dto;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 public record ProductItemResponseDto(
@@ -10,5 +9,5 @@ public record ProductItemResponseDto(
         BigDecimal price,
         Long pizzaType,
         ProductResponseDto product
-) implements Serializable {
+) {
 }

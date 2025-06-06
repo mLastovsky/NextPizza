@@ -1,8 +1,7 @@
 package com.nextpizza.dto;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.Instant;
 
 public record IngredientResponseDto(
 
@@ -10,7 +9,7 @@ public record IngredientResponseDto(
         String name,
         BigDecimal price,
         String imageUrl,
-        OffsetDateTime createdAt,
-        OffsetDateTime updatedAt
-) implements Serializable {
+        Instant createdAt,
+        Instant updatedAt
+) {
 }
