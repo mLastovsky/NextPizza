@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.math.BigDecimal;
@@ -20,7 +21,7 @@ public interface IngredientProxy {
     @GetMapping("/{id}/price")
     BigDecimal getIngredientPriceById(@PathVariable Long id);
 
-    @GetMapping
+    @PostMapping("/by-ids")
     List<IngredientResponseDto> getIngredientsByIds(@RequestBody List<Long> ids);
 
 }
