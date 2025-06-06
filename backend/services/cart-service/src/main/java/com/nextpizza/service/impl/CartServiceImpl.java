@@ -52,12 +52,13 @@ public class CartServiceImpl implements CartService {
     public CartResponseDto addItemToCart(CreateCartItemDto dto, String token, HttpServletResponse response) {
         if (isTokenEmpty(token)) {
             token = generateNewToken();
-            setCartTokenCookie(response, token);
         }
 
         var cart = findOrCreateCart(token);
         updateCartItems(cart, dto);
         calculateTotalAmount(cart);
+
+        setCartTokenCookie(response, token);
 
         return cartMapper.toDto(cart);
     }
