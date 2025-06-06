@@ -32,9 +32,7 @@ public class CartItemController {
             @PathVariable Long id,
             @CookieValue(value = "cartToken", required = false) String token
     ) {
-        return ResponseEntity
-                .status(HttpStatus.NO_CONTENT)
-                .body(cartItemService.deleteCartItem(id, token));
+        return ResponseEntity.ok(cartItemService.deleteCartItem(id, token));
     }
 
 }
