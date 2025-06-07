@@ -4,8 +4,6 @@ import { Dialog, DialogContent } from "@/shared/components/ui/dialog";
 import { cn } from "@/shared/lib/utils";
 import React from "react";
 import { useRouter } from "next/navigation";
-import { useCartStore } from "@/shared/store";
-import toast from "react-hot-toast";
 import { ProductForm } from "../product-form";
 import { Product } from "@/dto/models";
 

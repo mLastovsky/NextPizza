@@ -30,7 +30,7 @@
     "react-dadata": "^2.23.1",
     "react-dom": "^18",
     "react-hook-form": "^7.51.5",
-    "react-hot-toast": "^2.4.1",
+    "react-hot-toast": "^2.5.2",
     "react-insta-stories": "^2.7.0",
     "react-use": "^17.5.0",
     "resend": "^3.2.0",

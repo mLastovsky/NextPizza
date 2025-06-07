@@ -1,18 +1,17 @@
 "use client";
 
 import React from "react";
+import { Ingredient, ProductItem } from "@/dto/models";
 
 import { PizzaImage } from "./pizza-image";
 import { Title } from "./title";
 import { Button } from "../ui";
 import { GroupVariants } from "./group-variants";
+import { PizzaSize, PizzaType, pizzaTypes } from "@/shared/constants/pizza";
 import { IngredientItem } from "./ingredient-item";
 import { cn } from "@/shared/lib/utils";
 import { getPizzaDetails } from "@/shared/lib";
 import { usePizzaOptions } from "@/shared/hooks";
-import { Ingredient, ProductItem } from "@/dto/models";
-import { PizzaSize, PizzaType, pizzaTypes } from "@/shared/constants";
-import { useSet } from "react-use";
 
 interface Props {
   imageUrl: string;
@@ -20,19 +19,20 @@ interface Props {
   ingredients: Ingredient[];
   items: ProductItem[];
   loading?: boolean;
-  // onSubmit: (itemId: number, ingredients: number[]) => void;
-  // onClickAddCard?: VoidFunction;
+  onSubmit: (itemId: number, ingredients?: number[]) => void;
   className?: string;
 }
 
+/**
+ * Форма выбора ПИЦЦЫ
+ */
 export const ChoosePizzaForm: React.FC<Props> = ({
   name,
   items,
   imageUrl,
   ingredients,
-  // loading,
-  // onSubmit,
-  // onClickAddCart,
+  loading,
+  onSubmit,
   className,
 }) => {
   const {
@@ -56,7 +56,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 
   const handleClickAdd = () => {
     if (currentItemId) {
-      // onSubmit(currentItemId, Array.from(selectedIngredients));
+      onSubmit(currentItemId, Array.from(selectedIngredients));
     }
   };
 
@@ -99,7 +99,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
         </div>
 
         <Button
-          // loading={loading}
+          loading={loading}
           onClick={handleClickAdd}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
         >

@@ -2,75 +2,27 @@ import { axiosInstance } from "./instance";
 import { ApiRoutes } from "./constants";
 import { CartDTO, CreateCartItemValues } from "@/dto/models";
 
-/**
- * Получение текущей корзины.
- */
-export const getCart = async (token?: string): Promise<CartDTO> => {
-  const response = await axiosInstance.get<CartDTO>(ApiRoutes.CART, {
-    headers: token ? { Cookie: `cartToken=${token}` } : undefined,
-    withCredentials: true,
-  });
-
-  return response.data;
+export const getCart = async (): Promise<CartDTO> => {
+  return (await axiosInstance.get<CartDTO>(ApiRoutes.CART)).data;
 };
 
-export const getCartItem = async (id: number): Promise<CartDTO> => {
-  const response = await axiosInstance.get<CartDTO>(
-    `${ApiRoutes.CART_ITEMS}/${id}`
-  );
-
-  return response.data;
-};
-
-/**
- * Добавление товара в корзину.
- */
-export const addToCart = async (
-  data: CreateCartItemValues,
-  token?: string
-): Promise<CartDTO> => {
-  const response = await axiosInstance.post(ApiRoutes.CART, data, {
-    headers: token ? { Cookie: `cartToken=${token}` } : undefined,
-    withCredentials: true,
-  });
-
-  return response.data;
-};
-
-/**
- * Обновление количества товара в корзине.
- */
-export const updateCartItemQuantity = async (
+export const updateItemQuantity = async (
   id: number,
   quantity: number
-): Promise<void> => {
-  await axiosInstance.patch(`${ApiRoutes.CART}/${id}`, {
-    quantity,
-  });
+): Promise<CartDTO> => {
+  return (
+    await axiosInstance.patch(`${ApiRoutes.CART_ITEMS}/${id}`, {
+      quantity,
+    })
+  ).data;
 };
 
-export const updateTotalAmount = async (
-  id: number,
-  totalAmount: number
-): Promise<CartDTO> => {
-  const response = await axiosInstance.patch(`${ApiRoutes.CART}/${id}`, {
-    totalAmount,
-  });
-
-  return response.data;
+export const removeCartItem = async (id: number): Promise<CartDTO> => {
+  return (await axiosInstance.delete(`${ApiRoutes.CART_ITEMS}/${id}`)).data;
 };
 
-/**
- * Удаление товара из корзины.
- */
-export const deleteCartItem = async (
-  id: number,
-  token?: string
+export const addCartItem = async (
+  data: CreateCartItemValues
 ): Promise<CartDTO> => {
-  const response = await axiosInstance.delete(`${ApiRoutes.CART}/${id}`, {
-    headers: token ? { Cookie: `cartToken=${token}` } : undefined,
-    withCredentials: true,
-  });
-
-  return response.data;
+  return (await axiosInstance.post(ApiRoutes.CART, data)).data;
 };

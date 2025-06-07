@@ -1,8 +1,8 @@
+import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
 import React from "react";
 import { Variant } from "../components/shared/group-variants";
 import { useSet } from "react-use";
 import { getAvailablePizzaSizes } from "../lib";
-import { PizzaSize, PizzaType } from "../constants";
 import { ProductItem } from "@/dto/models";
 
 interface ReturnProps {
