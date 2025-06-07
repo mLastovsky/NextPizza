@@ -17,8 +17,8 @@ export default function CheckoutLayout({
       <Container>
         <Suspense>
           <Header
-            // hasSearch={false}
-            // hasCart={false}
+            hasSearch={false}
+            hasCart={false}
             className="border-b-gray-200"
           />
         </Suspense>

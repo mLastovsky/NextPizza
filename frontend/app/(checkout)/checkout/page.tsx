@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { FormProvider, useForm } from "react-hook-form";
-// import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   CheckoutSidebar,
@@ -10,44 +10,46 @@ import {
   CheckoutAddressForm,
   CheckoutCart,
   CheckoutPersonalForm,
-} from "@/shared/components";
-import { useCart } from "@/shared/hooks";
-// import { createOrder } from "@/app/actions";
-import toast from "react-hot-toast";
-import React from "react";
-// import { Api } from "@/shared/services/api-client";
-
-// Добавлены заглушки для отсутствующих типов
-type CheckoutFormValues = any;
+} from '@/shared/components';
+import { useCart } from '@/shared/hooks';
+// import { createOrder } from '@/app/actions';
+import toast from 'react-hot-toast';
+import React from 'react';
+// import { useSession } from 'next-auth/react';
+import { Api } from '@/shared/services/api-client';
+import { checkoutFormSchema, CheckoutFormValues } from '@/shared/constants/checkout-form-schema';
 
 export default function CheckoutPage() {
   const [submitting, setSubmitting] = React.useState(false);
-  const { totalAmount, updateItemQuantity, items, removeCartItem, loading } =
-    useCart();
+  const { totalAmount, updateItemQuantity, items, removeCartItem, loading } = useCart();
+  // const { data: session } = useSession();
 
   const form = useForm<CheckoutFormValues>({
-    // resolver: zodResolver(checkoutFormSchema),
+    resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
-      email: "",
-      firstName: "",
-      lastName: "",
-      phone: "",
-      address: "",
-      comment: "",
+      email: '',
+      firstName: '',
+      lastName: '',
+      phone: '',
+      address: '',
+      comment: '',
     },
   });
 
-  React.useEffect(() => {
-    async function fetchUserInfo() {
-      // const data = await Api.auth.getMe();
-      // const [firstName, lastName] = data.fullName.split(" ");
-      // form.setValue("firstName", firstName);
-      // form.setValue("lastName", lastName);
-      // form.setValue("email", data.email);
-    }
+  // React.useEffect(() => {
+  //   async function fetchUserInfo() {
+  //     const data = await Api.auth.getMe();
+  //     const [firstName, lastName] = data.fullName.split(' ');
 
-    fetchUserInfo();
-  }, []);
+  //     form.setValue('firstName', firstName);
+  //     form.setValue('lastName', lastName);
+  //     form.setValue('email', data.email);
+  //   }
+
+  //   if (session) {
+  //     fetchUserInfo();
+  //   }
+  // }, [session]);
 
   const onSubmit = async (data: CheckoutFormValues) => {
     try {
@@ -55,8 +57,8 @@ export default function CheckoutPage() {
 
       // const url = await createOrder(data);
 
-      toast.success("Заказ успешно оформлен! 📝 Переход на оплату... ", {
-        icon: "✅",
+      toast.error('Заказ успешно оформлен! 📝 Переход на оплату... ', {
+        icon: '✅',
       });
 
       // if (url) {
@@ -65,27 +67,20 @@ export default function CheckoutPage() {
     } catch (err) {
       console.log(err);
       setSubmitting(false);
-      toast.error("Не удалось создать заказ", {
-        icon: "❌",
+      toast.error('Не удалось создать заказ', {
+        icon: '❌',
       });
     }
   };
 
-  const onClickCountButton = (
-    id: number,
-    quantity: number,
-    type: "plus" | "minus"
-  ) => {
-    const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
+  const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
+    const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
     updateItemQuantity(id, newQuantity);
   };
 
   return (
     <Container className="mt-10">
-      <Title
-        text="Оформление заказа"
-        className="font-extrabold mb-8 text-[36px]"
-      />
+      <Title text="Оформление заказа" className="font-extrabold mb-8 text-[36px]" />
 
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -99,21 +94,14 @@ export default function CheckoutPage() {
                 loading={loading}
               />
 
-              <CheckoutPersonalForm
-                className={loading ? "opacity-40 pointer-events-none" : ""}
-              />
+              <CheckoutPersonalForm className={loading ? 'opacity-40 pointer-events-none' : ''} />
 
-              <CheckoutAddressForm
-                className={loading ? "opacity-40 pointer-events-none" : ""}
-              />
+              <CheckoutAddressForm className={loading ? 'opacity-40 pointer-events-none' : ''} />
             </div>
 
             {/* Правая часть */}
             <div className="w-[450px]">
-              <CheckoutSidebar
-                totalAmount={totalAmount}
-                loading={loading || submitting}
-              />
+              <CheckoutSidebar totalAmount={totalAmount} loading={loading || submitting} />
             </div>
           </div>
         </form>

@@ -1,9 +1,13 @@
-import React from 'react';
+'use client'
+
+import React, { useState } from 'react';
 import { WhiteBlock } from './white-block';
 import { CheckoutItemDetails } from './checkout-item-details';
-import { ArrowRight, Package, Percent, Truck } from 'lucide-react';
+import { ArrowRight, BadgePercent, Package, Percent, Truck } from 'lucide-react';
 import { Button, Skeleton } from '../ui';
 import { cn } from '@/shared/lib/utils';
+import { PromoCodeInput } from './checkout-promocode-input';
+import { usePromoCode } from '@/shared/hooks/use-promocode';
 
 const VAT = 15;
 const DELIVERY_PRICE = 250;
@@ -14,9 +18,23 @@ interface Props {
   className?: string;
 }
 
-export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, className }) => {
+export const CheckoutSidebar: React.FC<Props> = ({
+  totalAmount,
+  loading,
+  className,
+}) => {
+
+  const {
+    promoCode,
+    setPromoCode,
+    promoError,
+    discountAmount,
+    isValidatingPromo,
+    handleApplyPromo,
+  } = usePromoCode(totalAmount);
+
   const vatPrice = (totalAmount * VAT) / 100;
-  const totalPrice = totalAmount + DELIVERY_PRICE + vatPrice;
+  const totalPrice = totalAmount + DELIVERY_PRICE + vatPrice - discountAmount;
 
   return (
     <WhiteBlock className={cn('p-6 sticky top-4', className)}>
@@ -38,6 +56,7 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
         }
         value={loading ? <Skeleton className="h-6 w-16 rounded-[6px]" /> : `${totalAmount} ₽`}
       />
+
       <CheckoutItemDetails
         title={
           <div className="flex items-center">
@@ -47,6 +66,7 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
         }
         value={loading ? <Skeleton className="h-6 w-16 rounded-[6px]" /> : `${vatPrice} ₽`}
       />
+
       <CheckoutItemDetails
         title={
           <div className="flex items-center">
@@ -54,7 +74,29 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
             Доставка:
           </div>
         }
-        value={loading ? <Skeleton className="h-6 w-16 rounded-[6px]" /> : `${DELIVERY_PRICE} ₽`}
+        value={loading ? (<Skeleton className="h-6 w-16 rounded-[6px]" />) : (`${DELIVERY_PRICE} ₽`)
+        }
+      />
+
+      {discountAmount > 0 && (
+        <CheckoutItemDetails
+          title={
+            <div className="flex items-center text-green-600">
+              <BadgePercent size={18} className="mr-2" />
+              Скидка:
+            </div>
+          }
+          value={loading ? (<Skeleton className="h-6 w-16 rounded-[6px]" />) : (`- ${discountAmount} ₽`)
+          }
+        />
+      )}
+
+      <PromoCodeInput
+        promoCode={promoCode}
+        onChange={setPromoCode}
+        onApply={handleApplyPromo}
+        loading={isValidatingPromo}
+        errorText={promoError}
       />
 
       <Button
