@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 import static java.lang.String.format;
@@ -178,7 +179,8 @@ public class CartServiceImpl implements CartService {
     private void calculateTotalAmount(Cart cart) {
         var total = cart.getCartItems().stream()
                 .map(this::calculateItemTotalPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(0, RoundingMode.CEILING);;
 
         cart.setTotalAmount(total);
     }
