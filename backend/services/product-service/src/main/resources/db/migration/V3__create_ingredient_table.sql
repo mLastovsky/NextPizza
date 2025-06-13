@@ -1,0 +1,8 @@
+CREATE TABLE ingredient (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL NOT NULL,
+    image_url VARCHAR(255),
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE
+);

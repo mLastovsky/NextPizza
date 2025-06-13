@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/carts_repository
+    username:
+    password:
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+
+application:
+    product-item-service:
+      url: http://localhost:8222/api/v1/product-items
+
+    user-service:
+      url: http://localhost:8222/api/v1/users
+
+    ingredient-service:
+      url: http://localhost:8222/api/v1/ingredients
+
+server:
+  port: 8030

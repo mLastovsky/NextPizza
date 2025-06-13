@@ -1,0 +1,95 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+      routes:
+        - id: user-service-route
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/v1/users/**
+
+        - id: user-service-swagger
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/**
+
+        - id: product-service-route
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/products/**
+
+        - id: user-service-swagger
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/product-service/**
+
+        - id: ingredients-service-route
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/ingredients/**
+
+        - id: product-items-service-route
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/product-items/**
+
+        - id: categories-service-route
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/categories/**
+
+        - id: dough-type-service-route
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/dough-types/**
+
+        - id: cart-service-route
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/api/v1/carts/**
+
+        - id: cart-service-swagger
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/cart-service/**
+
+        - id: cart-items-service-route
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/api/v1/cart-items/**
+
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - TokenRelay=
+
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders: "*"
+            allowCredentials: true
+            allowedMethods: GET, POST, DELETE, PUT, PATCH, OPTIONS
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    urls:
+      - name: gateway
+        url: /v3/api-docs
+
+      - name: product-service
+        url: /product-service/v3/api-docs
+
+      - name: user-service
+        url: /user-service/v3/api-docs
+
+      - name: cart-service
+        url: /cart-service/v3/api-docs
+
+server:
+  port: 8222
